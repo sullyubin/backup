@@ -52,6 +52,17 @@ public class AdminService {
 		return dao.petaccept(id);
 	}
 	
+	@Transactional("txManager")
+	public int petcencel(String id) {
+		MessageDTO dto = new MessageDTO();
+		dto.setMsg_reciever(id);
+		dto.setMsg_title("펫 시터 관련 글입니다.");
+		dto.setMsg_contents("신청이 거절되었습니다. 규약을 잘 읽어보고 다시 신청해주시길 바랍니다.");
+		dto.setMsg_sender("관리자");
+		mdao.sendMessage(dto);
+		return dao.petaccept(id);
+	}
+	
 	//회원 관리
 	
 	public List<MemberDTO> member(int cpage){

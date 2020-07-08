@@ -119,8 +119,9 @@
 		                                   	<div class="col-4 col-lg-3">상태 변경</div>
                                     	</div>
                                     	<hr class="hr2">
-                                    	<div class="row body">
+                                   
                                     	<c:forEach var="i" items="${memberlist}">
+                                    	<div class="row body">
                                     		<div class="col-4 col-lg">${i.mem_id}</div>
 		                                   	<div class="col-4 col-lg">
 		                                   	<c:choose>
@@ -132,7 +133,7 @@
 		                                   	<div class="d-none d-lg-block col-lg">${i.mem_point}</div>
 		                                   	<div class="col-4 col-lg">${i.mem_warning}</div>
 		                                   	<div class="col-4 col-lg">통상</div>
-		                                   	<div class="col-4 col-lg"><button  class="btn btn-outline-primary my-2 my-sm-0 btn-sm">보내기</button></div>
+		                                   	<div class="col-4 col-lg"><button  class="btn btn-outline-primary my-2 my-sm-0 btn-sm message">보내기</button></div>
 		                                   	<div class="col-4 col-lg-3">
 			                                   	<form>
 	                                                 <select name="state" class="btn btn-info dropdown-toggle btn-sm">
@@ -143,9 +144,10 @@
 	                                             </form>
                                              </div>
                                              <hr class="hr2">   
+                                        </div>   	
                                         </c:forEach>
                                         <div class="col-12" style="text-align: center">${navi}</div>   
-                                    	</div>   	 
+                                    	 
                                     </div>
                                 </div>
                             </div>

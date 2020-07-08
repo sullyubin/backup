@@ -35,7 +35,14 @@ public class AdminController {
 
 	
 	@RequestMapping("main")
-	public String go_admin_main() {
+	public String go_admin_main(Model m,Integer cpage) {
+		if(cpage == null) {
+			cpage = 1;
+		}
+		List<MemberDTO> mdto = admin_service.member(cpage);
+		String navi = admin_service.memberPagNavi(cpage);
+		m.addAttribute("navi",navi);
+		m.addAttribute("memberlist",mdto);	
 		return "admin/index";
 	}
 
@@ -73,11 +80,27 @@ public class AdminController {
 
 	@RequestMapping("petaccept")
 	public void petaccept(String id,HttpServletResponse response) {
-		System.out.println(id);
 		int re = admin_service.petaccept(id);
 		try {
 			if(re>0) {
-				
+				response.sendRedirect("/admin/petsiter");
+			}
+			else {
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('데이터 전송에 실패했습니다.'); location.href='/admin/petsiter';</script>");
+				out.flush();
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping("cencel")
+	public void petcencel(String id,HttpServletResponse response) {
+		int re = admin_service.petcencel(id);
+		try {
+			if(re>0) {
 				response.sendRedirect("/admin/petsiter");
 			}
 			else {
