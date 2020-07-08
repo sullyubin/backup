@@ -8,7 +8,7 @@
 <link rel="stylesheet"
 	href="/resources/main/fonts/flaticon/font/flaticon.css">
 <link rel="stylesheet" href="/resources/petsiter/css/tavo-calendar.css">
-<link href="/resources/main/icofont/icofont.min.css" rel="stylesheet">
+<link href="/resources/mb/icofont/icofont.min.css" rel="stylesheet">
 <link href='https://unpkg.com/boxicons@2.0.5/css/boxicons.min.css'
 	rel='stylesheet'>
 <script src="https://unpkg.com/boxicons@latest/dist/boxicons.js"></script>
