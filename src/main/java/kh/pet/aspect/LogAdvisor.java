@@ -18,6 +18,9 @@ public class LogAdvisor {
 		}
 		Object re = pj.proceed();
 		return re;
+		
+		
+		
 	}
 
 

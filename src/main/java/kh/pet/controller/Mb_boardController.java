@@ -28,7 +28,7 @@ public class Mb_boardController {
 	@Autowired
 	private HttpSession session;	
 
-	//	반려인 등록게시판 정보 출력	
+	//	諛섎젮�씤 �벑濡앷쾶�떆�뙋 �젙蹂� 異쒕젰	
 	@RequestMapping("home")
 	public String home(Model m) {
 		List<PetDto> list = service.Petselect();
@@ -41,7 +41,7 @@ public class Mb_boardController {
 		return "mb_board/board_register";
 	}
 
-	//	예약등록 - 1
+	//	�삁�빟�벑濡� - 1
 	@RequestMapping("index")
 	public String index(MemboardDto mbdto) {
 		MemberDTO mdto = (MemberDTO)this.session.getAttribute("loginInfo");
@@ -52,7 +52,7 @@ public class Mb_boardController {
 		return "redirect:redlist";
 	}
 
-	// 등록뷰 보드seq값추가해줘야함	
+	// �벑濡앸럭 蹂대뱶seq媛믪텛媛��빐以섏빞�븿	
 	@RequestMapping("redlist")
 	public String redlist(Model m,MemboardDto mbdto) {
 		MemberDTO mdto = (MemberDTO)this.session.getAttribute("loginInfo");
@@ -63,11 +63,11 @@ public class Mb_boardController {
 		String[] servicearr = mlist.getMb_service().split(",");
 		String[] timearr = mlist.getMb_time().split(",");
 		String[] petnamearr = mlist.getMb_pet_name().split(",");
-		List<String> times = new ArrayList<>();
-		List<String> pettype = new ArrayList<>();
-		List<String> petphoto = new ArrayList<>();
-		List<String> services = new ArrayList<>();
-		List<String> timetype = new ArrayList<>();
+		List<String> times = new ArrayList<String>();
+		List<String> pettype = new ArrayList<String>();
+		List<String> petphoto = new ArrayList<String>();
+		List<String> services = new ArrayList<String>();
+		List<String> timetype = new ArrayList<String>();
 		for(String time : timearr) {
 			times.add(service.gettime(time));
 			timetype.add(time);
@@ -97,7 +97,7 @@ public class Mb_boardController {
 		return "mb_board/board";
 	}
 
-	// 수정 뷰	
+	// �닔�젙 酉�	
 	@RequestMapping("modfilist")
 	public String modfilist(Model m,MemboardDto mbdto) {
 		MemberDTO mdto = (MemberDTO)this.session.getAttribute("loginInfo");
@@ -106,11 +106,11 @@ public class Mb_boardController {
 		String[] servicearr = mlist.getMb_service().split(",");
 		String[] timearr = mlist.getMb_time().split(",");
 		String[] petnamearr = mlist.getMb_pet_name().split(",");
-		List<String> times = new ArrayList<>();
-		List<String> pettype = new ArrayList<>();
-		List<String> petphoto = new ArrayList<>();
-		List<String> services = new ArrayList<>();
-		List<String> timetype = new ArrayList<>();
+		List<String> times = new ArrayList<String>();
+		List<String> pettype = new ArrayList<String>();
+		List<String> petphoto = new ArrayList<String>();
+		List<String> services = new ArrayList<String>();
+		List<String> timetype = new ArrayList<String>();
 		for(String time : timearr) {
 			times.add(service.gettime(time));
 			timetype.add(time);
@@ -146,9 +146,9 @@ public class Mb_boardController {
 		String[] petnamearr = modlist.getMb_pet_name().split(",");
 		String[] servicearr = modlist.getMb_service().split(",");
 		String[] timearr = modlist.getMb_time().split(",");
-		List<String> times = new ArrayList<>();
-		List<String> petnames = new ArrayList<>();
-		List<String> services = new ArrayList<>();
+		List<String> times = new ArrayList<String>();
+		List<String> petnames = new ArrayList<String>();
+		List<String> services = new ArrayList<String>();
 
 		for(String time : timearr) {
 			times.add(time);
@@ -209,7 +209,7 @@ public class Mb_boardController {
 			}
 		}
 
-		System.out.println("현재페이지 : "+cpage);
+		System.out.println("�쁽�옱�럹�씠吏� : "+cpage);
 		String navi = service.getPageNavi(cpage);
 		m.addAttribute("navi", navi);
 		m.addAttribute("mblist", mblist);
