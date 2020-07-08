@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Petsitter">
+
+	<insert id="insert">
+		insert into petsitter
+		(ps_id,ps_age,ps_gender,ps_resident_type,ps_address1,ps_address2,
+		ps_service,ps_drive,ps_license,ps_license_img,ps_img,ps_myself)
+		values(#{ps_id},#{ps_age},#{ps_gender},#{ps_resident_type},#{ps_address1},#{ps_address2},#{ps_service},#{ps_drive},#{ps_license},#{ps_license_img,
+		jdbcType=VARCHAR},#{ps_img},#{ps_myself})
+	</insert>
+
+	<select id="selectById" resultType="kh.pet.dto.PetsitterDTO">
+		select * from petsitter where ps_id=#{ps_id}
+	</select>
+	
+	<update id="update_star">
+		update petsitter set ps_star = ps_star + #{rw_star} where ps_id = #{rw_petsitter_id}
+	</update>
+
+</mapper>
