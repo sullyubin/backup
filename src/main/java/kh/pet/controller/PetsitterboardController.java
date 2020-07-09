@@ -1,6 +1,7 @@
 package kh.pet.controller;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.UUID;
 
@@ -51,8 +52,8 @@ public class PetsitterboardController {
 		try {
 			cpage= Integer.parseInt(req.getParameter("cpage"));
 		} catch(Exception e) {}
-		List<PetsitterboardDTO> list =psbservice.outputList(cpage); // �븳�럹�씠吏��뿉 異쒕젰�릺�뒗 寃뚯떆臾� list
-		String pageNavi = psbservice.getPageNavi(cpage); //�꽕鍮꾨컮
+		List<PetsitterboardDTO> list =psbservice.outputList(cpage); 
+		String pageNavi = psbservice.getPageNavi(cpage);
 		model.addAttribute("list",list);
 		model.addAttribute("pageNavi",pageNavi);
 		return "petsitter_board/board/board_list";
@@ -117,5 +118,11 @@ public class PetsitterboardController {
 //		System.out.println("time:"+wdto.getPsb_time());
 		String mem_id=((MemberDTO)session.getAttribute("loginInfo")).getMem_id();
 		wdto.setMem_id(mem_id);
+		
+		String start_day = wdto.getRsv_start_day();
+		//String end_day = wdto.getRsv_end_day();
+		SimpleDateFormat basic_format = new SimpleDateFormat("yyyy-MM-dd");
+		System.out.println(basic_format.format(start_day));
+		
 	}
 }
