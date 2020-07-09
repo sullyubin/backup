@@ -14,6 +14,7 @@ import kh.pet.dto.MemberDTO;
 import kh.pet.dto.MemboardDto;
 import kh.pet.dto.MessageDTO;
 import kh.pet.dto.PetsitterDTO;
+import kh.pet.dto.WaitlistDTO;
 import kh.pet.staticInfo.Admin_Configuration;
 
 @Service
@@ -47,6 +48,17 @@ public class AdminService {
 		dto.setMsg_reciever(id);
 		dto.setMsg_title("펫 시터 관련 글입니다.");
 		dto.setMsg_contents("승인되었습니다. 지금부터는 펫 시터로 활동이 가능합니다.");
+		dto.setMsg_sender("관리자");
+		mdao.sendMessage(dto);
+		return dao.petaccept(id);
+	}
+	
+	@Transactional("txManager")
+	public int petcencel(String id) {
+		MessageDTO dto = new MessageDTO();
+		dto.setMsg_reciever(id);
+		dto.setMsg_title("펫 시터 관련 글입니다.");
+		dto.setMsg_contents("신청이 거절되었습니다. 규약을 잘 읽어보고 다시 신청해주시길 바랍니다.");
 		dto.setMsg_sender("관리자");
 		mdao.sendMessage(dto);
 		return dao.petaccept(id);
@@ -114,6 +126,10 @@ public class AdminService {
 	//예약 관리 페이지
 	public List<MemboardDto> re_memboard(){
 		return dao.re_memboard();
+	}
+	
+	public List<WaitlistDTO> re_psboard(){
+		return dao.re_psboard();
 	}
 	
 }

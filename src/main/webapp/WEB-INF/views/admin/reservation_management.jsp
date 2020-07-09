@@ -117,25 +117,46 @@
 								<div class="col-12">
 									<div class="row">
 										<div class="col">게시글 번호</div>
-										<div class="col">제목</div>
+										<div class="col">등록자</div>
 										<div class="col">신청자</div>
 										<div class="col">포인트</div>
 										<div class="col">수락/거절</div>
 									</div>
 									<hr style="width: 100%; margin: 15px;">
-									<c:forEach var="i" items="${list}">
-										<div class="row">
-											<div class="col">${i.mb_seq}</div>
-											<div class="col">${i.mb_title}</div>
-											<div class="col">${i.mb_booker}</div>
-											<div class="col">${i.mb_point}</div>
-											<div class="col">
-												<input type="button" value="수락" class="ok"> 
-												<input type="button" value="거절" class="cancle">
-											</div>
-										</div>
-										<hr style="width: 100%; margin: 15px;">
-									</c:forEach>
+									<c:choose>
+										<c:when test="${boardtype eq mb}">
+											<c:forEach var="i" items="${list}">
+												<div class="row">
+													<div class="mb" style="display: none;"></div>
+													<div class="col">${i.mb_seq}</div>
+													<div class="col">${i.mb_writer}</div>
+													<div class="col">${i.mb_booker}</div>
+													<div class="col">${i.mb_point}</div>
+													<div class="col">
+														<input type="button" value="수락" class="ok"> 
+														<input type="button" value="거절" class="cancle">
+													</div>
+												</div>
+												<hr style="width: 100%; margin: 15px;">
+											</c:forEach>
+										</c:when>
+										<c:when test="${boardtype eq ps}">
+											<c:forEach var="i" items="${list}">
+												<div class="row">
+													<div class="ps" style="display: none;"></div>
+													<div class="col">${i.board_seq}</div>
+													<div class="col">${i.petsitter_id}</div>
+													<div class="col">${i.mem_id}</div>
+													<div class="col">${i.rsv_point}</div>
+													<div class="col">
+														<input type="button" value="수락" class="ok"> 
+														<input type="button" value="거절" class="cancle">
+													</div>
+												</div>
+												<hr style="width: 100%; margin: 15px;">
+											</c:forEach>
+										</c:when>
+									</c:choose>			
 								</div>
 							</div>
 						</div>

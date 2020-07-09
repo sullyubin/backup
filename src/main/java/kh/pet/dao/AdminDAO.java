@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import kh.pet.dto.MemberDTO;
 import kh.pet.dto.MemboardDto;
 import kh.pet.dto.PetsitterDTO;
+import kh.pet.dto.WaitlistDTO;
 
 @Repository
 public class AdminDAO {
@@ -44,6 +45,12 @@ public class AdminDAO {
 	
 	//예약 관리  테이블
 	public List<MemboardDto> re_memboard(){
-		return mybatis.selectList("Admin.rememboard");
+
+			return mybatis.selectList("Admin.rememboard");
+	
+			
+	}
+	public List<WaitlistDTO> re_psboard(){
+		return mybatis.selectList("Admin.repsboard");
 	}
 }
