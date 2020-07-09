@@ -2,7 +2,7 @@ package kh.pet.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,19 +24,28 @@ public class Mypage_regController {
 	@Autowired
 	private MypageDAO mdao;
 	
+	@Autowired
+	HttpSession session;
+	
 	@RequestMapping("mypet_reg")
 	public void mypet_reg(Mypet_regDTO dto,MultipartFile img, HttpServletResponse response) throws Exception{	
-		regservice.reg("aa", dto, img);
+		String id = (String)session.getAttribute("id");
+		regservice.reg(id, dto, img);
 		response.sendRedirect("list");
+	}
+	
+	@RequestMapping("exchange")
+	public String exchange() {	
+		return "/mypage/exchange";
 	}
 	
 	@RequestMapping("contentview")
 	public String contentview(HttpServletRequest request) {
 		int seq = Integer.parseInt(request.getParameter("seq"));
-		System.out.println("시퀀스 값 : "+seq);
+		System.out.println("�떆���뒪 媛� : "+seq);
 		Mypet_regDTO dto = mdao.petlist(seq);
 		request.setAttribute("dto", dto);
-		return "mypage-contentview";
+		return "/mypage/mypage-contentview";
 	}
 	
 	
