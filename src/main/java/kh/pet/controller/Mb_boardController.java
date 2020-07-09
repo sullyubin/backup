@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kh.pet.dto.MemberDTO;
 import kh.pet.dto.MemboardDto;
-import kh.pet.dto.PetDto;
+import kh.pet.dto.Mypet_regDTO;
 import kh.pet.service.Petservice;
 
 @Controller
@@ -30,11 +30,10 @@ public class Mb_boardController {
 	
 	@RequestMapping("home")
 	public String home(Model m) {
-		List<PetDto> list = service.Petselect();
 		MemberDTO mdto = (MemberDTO)this.session.getAttribute("loginInfo");
+		List<Mypet_regDTO> list = service.Petselect(mdto.getMem_id());
 		String add = service.addselec(mdto.getMem_id());
-		System.out.println(mdto.getMem_id());
-		System.out.println(add);
+		
 		m.addAttribute("list", list);
 		m.addAttribute("add", add);
 		return "mb_board/board_register";
@@ -132,6 +131,7 @@ public class Mb_boardController {
 
 	@RequestMapping("modified")
 	public String redlist_modified(Model m,String mb_seq) {
+		MemberDTO mdto = (MemberDTO)this.session.getAttribute("loginInfo");
 		MemboardDto modlist = service.modlist(mb_seq);
 		String[] petnamearr = modlist.getMb_pet_name().split(",");
 		String[] servicearr = modlist.getMb_service().split(",");
@@ -144,7 +144,7 @@ public class Mb_boardController {
 		for(String petname : petnamearr) {
 			petnames.add(petname);
 		}
-		List<PetDto> list = service.Petselect();
+		List<Mypet_regDTO> list = service.Petselect(mdto.getMem_id());
 
 		String add = service.addselec(modlist.getMb_writer());
 		m.addAttribute("list", list);
