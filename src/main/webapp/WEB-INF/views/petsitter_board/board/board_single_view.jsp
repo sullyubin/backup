@@ -524,7 +524,10 @@ ul>li, input {
 							</ul>
 						</div>
 						 <script>
+						var arr = [];
+						var tmp = 0;
 						 $(function(){
+							
 							 var now = new Date();
 				               var datePicker = new Datepickk1({
 				                  	container:document.querySelector('#datePicker'),
@@ -535,11 +538,33 @@ ul>li, input {
 				                     tooltips: {
 				                     date: new Date(),
 				                     text: '예약'
-				                  }, onSelect(checked){
-				                	 var selday = this.toLocaleDateString();
-					                  console.log(selday);
-				                }
-				              });
+				                  }
+				              }).onSelect = function(checked){
+				            	   var state = (checked)?'selected':'unselected';
+				            		   if(checked){
+				            			   var time = this.toLocaleDateString();
+					            		   if(arr.length > 1){ 
+					            			   if(tmp == 'aa'){
+					            				   arr[1] = time;
+					            				   alert(arr[1]);
+					            				   tmp = '';
+					            				   
+					            			   }
+					            			   else{
+					            				   arr[0] = time;
+					            				   alert(arr[0]);
+					            				   tmp = 'aa';
+					            			   }
+					            		   }
+					            		   else{
+					            			   arr.push(time);
+					            			   
+					            			   
+					            		   }
+					            	   }	
+
+				            	   };
+				               
 						 })
 						</script>
 					</div>
