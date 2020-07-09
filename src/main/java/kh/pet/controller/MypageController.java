@@ -91,6 +91,7 @@ public class MypageController {
 			request.setAttribute("bdto", bdto);
 			request.setAttribute("mem_type", mem_type);
 			request.setAttribute("sum", sum);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
