@@ -11,17 +11,12 @@ public class LogAdvisor {
 	private HttpSession session;
 	
 	public Object logincheck(ProceedingJoinPoint pj) throws Throwable{
-		if(session.getAttribute("id")==null) {
-			return "redirect:/";
+		if(session.getAttribute("loginInfo")==null) {
+			return "/member/login";
 		}
 		else {
 		}
 		Object re = pj.proceed();
 		return re;
-		
-		
-		
 	}
-
-
 }

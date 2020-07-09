@@ -26,6 +26,10 @@ public class HomeController {
 	public String home(Locale locale, Model model) {
 		return "main";
 	}
+	
+	
+	
+	
 	@RequestMapping("login2")
 	public String login(String id) {
 		session.setAttribute("id", id);
@@ -34,40 +38,32 @@ public class HomeController {
 		return "home2";
 	}
 	
-	@RequestMapping("tmp")
-	public String tmp() {
-		return "petsitter_board/home";
+	@RequestMapping("/message")
+	public String message() {
+		return "home2";
 	}
 	
-	@RequestMapping("adminindex")
-	public String admin() {
-		return "admin/index";
-	}
+
 	
 	@RequestMapping("community")
 	public String community() {
 		return "/";
 	}
 	
-	@RequestMapping("/point/charge")
-	public String charge() {
-		return "/petsitter_board/point/charge";
-	}
-	
-	@RequestMapping("/point/payment")
-	public String payment(int mem_point,Model model) {
-		model.addAttribute("point",mem_point);
-		return "/petsitter_board/point/payment";
-	}
+	/*
+	 * @RequestMapping("/point/charge") public String charge() { return
+	 * "/petsitter_board/point/charge"; }
+	 * 
+	 * @RequestMapping("/point/payment") public String payment(int mem_point,Model
+	 * model) { model.addAttribute("point",mem_point); return
+	 * "/petsitter_board/point/payment"; }
+	 */
 	
 	@RequestMapping("/signup")
 	public String signup() {
 		return "member/signup";
 	}
 	
-	@RequestMapping("/message")
-	public String message() {
-		return "home2";
-	}
+	
 	
 }

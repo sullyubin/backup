@@ -124,7 +124,7 @@
 									</div>
 									<hr style="width: 100%; margin: 15px;">
 									<c:choose>
-										<c:when test="${boardtype eq mb}">
+										<c:when test="${boardtype eq 'mb'}">
 											<c:forEach var="i" items="${list}">
 												<div class="row">
 													<div class="mb" style="display: none;"></div>
@@ -133,14 +133,14 @@
 													<div class="col">${i.mb_booker}</div>
 													<div class="col">${i.mb_point}</div>
 													<div class="col">
-														<input type="button" value="수락" class="ok"> 
-														<input type="button" value="거절" class="cancle">
+														<input type="button" value="수락" class="btn btn-outline-primary my-2 my-sm-0 btn-sm ok"> 
+														<input type="button" value="거절" class="btn btn-outline-primary my-2 my-sm-0 btn-sm cancle">
 													</div>
 												</div>
 												<hr style="width: 100%; margin: 15px;">
 											</c:forEach>
 										</c:when>
-										<c:when test="${boardtype eq ps}">
+										<c:when test="${boardtype eq 'ps'}">
 											<c:forEach var="i" items="${list}">
 												<div class="row">
 													<div class="ps" style="display: none;"></div>
@@ -149,8 +149,8 @@
 													<div class="col">${i.mem_id}</div>
 													<div class="col">${i.rsv_point}</div>
 													<div class="col">
-														<input type="button" value="수락" class="ok"> 
-														<input type="button" value="거절" class="cancle">
+														<input type="button" value="수락" class="btn btn-outline-primary my-2 my-sm-0 btn-sm ok"> 
+														<input type="button" value="거절" class="btn btn-outline-primary my-2 my-sm-0 btn-sm cancle">
 													</div>
 												</div>
 												<hr style="width: 100%; margin: 15px;">

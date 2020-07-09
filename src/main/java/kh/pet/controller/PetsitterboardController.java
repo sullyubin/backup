@@ -51,8 +51,8 @@ public class PetsitterboardController {
 		try {
 			cpage= Integer.parseInt(req.getParameter("cpage"));
 		} catch(Exception e) {}
-		List<PetsitterboardDTO> list =psbservice.outputList(cpage); // �븳�럹�씠吏��뿉 異쒕젰�릺�뒗 寃뚯떆臾� list
-		String pageNavi = psbservice.getPageNavi(cpage); //�꽕鍮꾨컮
+		List<PetsitterboardDTO> list =psbservice.outputList(cpage);
+		String pageNavi = psbservice.getPageNavi(cpage);
 		model.addAttribute("list",list);
 		model.addAttribute("pageNavi",pageNavi);
 		return "petsitter_board/board/board_list";

@@ -33,6 +33,10 @@ public class AdminDAO {
 		return mybatis.update("Admin.petaccept",id);
 	}
 	
+	public int petcencel(String id) {
+		return mybatis.delete("Admin.petcencel",id);
+	}
+	
 	
 	//회원 관리
 	public List<MemberDTO> memberlist(Map<String, Integer> map){
@@ -45,12 +49,10 @@ public class AdminDAO {
 	
 	//예약 관리  테이블
 	public List<MemboardDto> re_memboard(){
-
-			return mybatis.selectList("Admin.rememboard");
-	
-			
+		return mybatis.selectList("Admin.rememboard");		
 	}
 	public List<WaitlistDTO> re_psboard(){
 		return mybatis.selectList("Admin.repsboard");
 	}
+	
 }

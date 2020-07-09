@@ -50,6 +50,7 @@ public class AdminService {
 		dto.setMsg_contents("승인되었습니다. 지금부터는 펫 시터로 활동이 가능합니다.");
 		dto.setMsg_sender("관리자");
 		mdao.sendMessage(dto);
+		System.out.println(id);
 		return dao.petaccept(id);
 	}
 	
@@ -61,7 +62,8 @@ public class AdminService {
 		dto.setMsg_contents("신청이 거절되었습니다. 규약을 잘 읽어보고 다시 신청해주시길 바랍니다.");
 		dto.setMsg_sender("관리자");
 		mdao.sendMessage(dto);
-		return dao.petaccept(id);
+		System.out.println(id);
+		return dao.petcencel(id);
 	}
 	
 	//회원 관리
@@ -112,13 +114,13 @@ public class AdminService {
 		}
 
 		if(needPrev) {
-			sb.append("<a href=\"/admin/memberlist?cpage="+(startNavi-1)+"\"class=\"badge badge-pill badge-info\"><</a>");
+			sb.append("<a href=\"/admin/member?cpage="+(startNavi-1)+"\"class=\"badge badge-pill badge-info\"><</a>");
 		}
 		for(int i = startNavi; i<=endNavi; i++) {
-			sb.append("<a href=\"/admin/memberlist?cpage="+i+"\"class=\"badge badge-pill badge-info\">"+i+"</a>");	
+			sb.append("<a href=\"/admin/member?cpage="+i+"\"class=\"badge badge-pill badge-info\">"+i+"</a>");	
 		}
 		if(needNext) {
-			sb.append("<a href=\"/admin/memberlist?cpage="+(endNavi+1)+"\"class=\"badge badge-pill badge-info\">></a>");
+			sb.append("<a href=\"/admin/member?cpage="+(endNavi+1)+"\"class=\"badge badge-pill badge-info\">></a>");
 		}
 		return sb.toString();
 	}

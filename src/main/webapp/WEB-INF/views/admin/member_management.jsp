@@ -12,8 +12,15 @@
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
+		<link
+			href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
+			rel="stylesheet">
+		<script
+			src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 		<script src="/resources/admin/admin_js/navi.js"></script>
 		<link rel="stylesheet" href="/resources/admin/admin_css/case.css" type="text/css">
+		<script src="/resources/message/message_js/summer.js"></script>
+		<script src="/resources/admin/admin_js/admin.js"></script>
     </head>
     <body>
         <div class="wrap row bg-light">
@@ -119,7 +126,28 @@
 		                                   	<div class="col-4 col-lg-3">상태 변경</div>
                                     	</div>
                                     	<hr class="hr2">
-                                   
+                                   		<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+											  <div class="modal-dialog">
+											    <div class="modal-content">
+											      <div class="modal-header">
+											        <h5 class="modal-title" id="staticBackdropLabel">메세지 작성</h5>	   
+											        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											          <span aria-hidden="true">&times;</span>
+											        </button>
+											      </div>
+											      <div class="modal-body">
+											      <div><label>제목</label><input type="text" name="msg_title" style="width: 90%;" id="msg_title"></div> 
+										          <br>
+									      	 	<textarea id="summernote" name="msg_contents"></textarea>
+									        	   <br>
+											      </div>	
+											      <div class="modal-footer">
+											        <button type="button" class="btn btn-secondary no" data-dismiss="modal">취소</button>
+											        <button type="button" class="btn btn-primary send">전송</button>
+											      </div>
+											    </div>
+											  </div>
+											</div>
                                     	<c:forEach var="i" items="${memberlist}">
                                     	<div class="row body">
                                     		<div class="col-4 col-lg">${i.mem_id}</div>
@@ -133,12 +161,14 @@
 		                                   	<div class="d-none d-lg-block col-lg">${i.mem_point}</div>
 		                                   	<div class="col-4 col-lg">${i.mem_warning}</div>
 		                                   	<div class="col-4 col-lg">통상</div>
-		                                   	<div class="col-4 col-lg"><button  class="btn btn-outline-primary my-2 my-sm-0 btn-sm message">보내기</button></div>
+		                                   	<div class="col-4 col-lg"><button  class="btn btn-outline-primary my-2 my-sm-0 btn-sm message" id="${i.mem_id}" data-toggle="modal" data-target="#staticBackdrop">보내기</button></div>
 		                                   	<div class="col-4 col-lg-3">
 			                                   	<form>
 	                                                 <select name="state" class="btn btn-info dropdown-toggle btn-sm">
-	                                                     <option value="통상">통상</option>
-	                                                     <option value="통상">정지</option>
+	                                                     <option value="no">통상</option>
+	                                                     <option value="3_stop">3일 정지 추가</option>
+	                                                     <option value="7_stop">7일 정지 추가</option>
+	                                                     <option value="f_stop">영구 정지</option>
 	                                                 </select>
 	                                                 <button class="btn btn-outline-primary my-2 my-sm-0 btn-sm">변경</button>
 	                                             </form>

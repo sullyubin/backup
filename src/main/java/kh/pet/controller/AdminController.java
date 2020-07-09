@@ -4,22 +4,28 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.sun.mail.handlers.message_rfc822;
+
 import kh.pet.dto.MemberDTO;
 import kh.pet.dto.MemboardDto;
-
+import kh.pet.dto.MessageDTO;
 import kh.pet.dto.PetsitterDTO;
+import kh.pet.dto.PetsitterboardDTO;
 import kh.pet.dto.WaitlistDTO;
 import kh.pet.service.AdminService;
-
+import kh.pet.service.MessageService;
 import kh.pet.service.Petservice;
+import kh.pet.service.PetsitterboardService;
 
 @Controller
 @RequestMapping("/admin/")
@@ -33,7 +39,19 @@ public class AdminController {
 
 	@Autowired
 	private HttpSession session;
+	
+	@Autowired
+	private PetsitterboardService sitter_service;
+	
+	@Autowired
+	private MessageService message_service;
+	
 
+	@RequestMapping("adminindex")
+	public String admin() {
+		return "admin/index";
+	}
+	
 	
 	@RequestMapping("main")
 	public String go_admin_main(Model m,Integer cpage) {
@@ -65,7 +83,6 @@ public class AdminController {
 			m.addAttribute("list", list);
 		}
 		session.setAttribute("boardtype", boardtype);
-		
 		return "admin/reservation_management";
 	}
 	
@@ -131,6 +148,15 @@ public class AdminController {
 	}
 	
 	
+	@RequestMapping("message")
+	public void admin_message(MessageDTO dto,HttpServletResponse response) throws Exception{
+		dto.setMsg_sender("관리자");
+		int re = message_service.sendMessage(dto);
+		JSONObject jobj = new JSONObject();
+		jobj.put("re", re );
+		response.getWriter().append(jobj.toString());
+	}
+	
 	//블랙 회원 관리
 
 	@RequestMapping("black")
@@ -146,18 +172,28 @@ public class AdminController {
 	}
 
 	@RequestMapping("boardselect")
-	public String boardselect(String boardtype, Integer cpage , Model m) {
-		session.removeAttribute("boardtype");
-		if(boardtype.contentEquals("mem_board")) {
-			if(cpage == null) {
-				cpage = 1;
-			}
-			List<MemboardDto> mblist = pet_service.mb_boardList(cpage);
-			m.addAttribute("list", mblist);
+	public String boardselect(String boardtype, Integer cpage , Model m) throws Exception{
+		if(cpage == null) {
+			cpage = 1;
 		}
+		String navi = "";
+		if(boardtype.contentEquals("mem_board")) {
+			List<MemboardDto> boardlist = pet_service.mb_boardList(cpage);
+			navi = pet_service.getPageNavi(cpage);
+			m.addAttribute("list", boardlist);
+			
+		}else if(boardtype.contentEquals("petsitter_board")) {
+			List<PetsitterboardDTO> boardlist = sitter_service.outputList(cpage);
+			navi = sitter_service.getPageNavi(cpage);
+			m.addAttribute("list", boardlist);
+			boardlist.get(0).getPsb_boardstatus();
+		}
+		m.addAttribute("navi",navi);
 		session.setAttribute("boardtype", boardtype);
 		return "admin/board_management";
 	}
+	
+	
 
 	@RequestMapping("boardblack")
 	public void boardblack(String state, String seq,HttpServletResponse response) {

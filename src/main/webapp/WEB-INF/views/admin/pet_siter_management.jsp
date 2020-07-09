@@ -123,7 +123,7 @@
 	                                    	<div class= col-3><a href="#">내용 보기</a></div>
 	                                    	<div class= col-3>
 	                                    		<input type="button" value="수락" class="accept" id="${i.ps_id}">
-	                                    		<input type="button" value="거절" class="cencel" >
+	                                    		<input type="button" value="거절" class="cencel" id="${i.ps_id}">
 	                                    	</div> 
 	                                    </c:forEach>
 	                                    </div>
