@@ -10,15 +10,16 @@ import org.springframework.stereotype.Service;
 import kh.pet.staticInfo.Mb_Configuration;
 import kh.pet.dao.PetDao;
 import kh.pet.dto.MemboardDto;
-import kh.pet.dto.PetDto;
+import kh.pet.dto.Mypet_regDTO;
+
 
 @Service
 public class Petservice {
 	@Autowired
 	private PetDao dao;
 	
-	public List<PetDto> Petselect(){
-		return dao.Petselect();
+	public List<Mypet_regDTO> Petselect(String id){
+		return dao.Petselect(id);
 	}
 	
 	public int Memboardinsert(MemboardDto mdto) {

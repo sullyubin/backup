@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import kh.pet.dto.MemberDTO;
-import kh.pet.dto.PetDto;
+import kh.pet.dto.Mypet_regDTO;
 import kh.pet.dto.PetsitterDTO;
 import kh.pet.dto.PetsitterboardDTO;
 import kh.pet.dto.TotboardDTO;
@@ -67,7 +67,7 @@ public class PetsitterboardController {
 	@RequestMapping("board_single_view")
 	public String board_single_view(Model model,TotboardDTO totdto)throws Exception{
 		model.addAttribute("tot_Info",totdto);
-		List<PetDto> pet_list = psbservice.selectMypet(((MemberDTO)session.getAttribute("loginIfo")).getMem_id());
+		List<Mypet_regDTO> pet_list = psbservice.selectMypet(((MemberDTO)session.getAttribute("loginIfo")).getMem_id());
 		model.addAttribute("pet_list",pet_list);
 		return "petsitter_board/board/board_single_view";
 	}
