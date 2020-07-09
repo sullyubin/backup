@@ -14,6 +14,7 @@ import kh.pet.dto.MemberDTO;
 import kh.pet.dto.MemboardDto;
 import kh.pet.dto.MessageDTO;
 import kh.pet.dto.PetsitterDTO;
+import kh.pet.dto.WaitlistDTO;
 import kh.pet.staticInfo.Admin_Configuration;
 
 @Service
@@ -125,6 +126,10 @@ public class AdminService {
 	//예약 관리 페이지
 	public List<MemboardDto> re_memboard(){
 		return dao.re_memboard();
+	}
+	
+	public List<WaitlistDTO> re_psboard(){
+		return dao.re_psboard();
 	}
 	
 }

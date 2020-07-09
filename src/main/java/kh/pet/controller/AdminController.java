@@ -16,6 +16,7 @@ import kh.pet.dto.MemberDTO;
 import kh.pet.dto.MemboardDto;
 
 import kh.pet.dto.PetsitterDTO;
+import kh.pet.dto.WaitlistDTO;
 import kh.pet.service.AdminService;
 
 import kh.pet.service.Petservice;
@@ -54,14 +55,14 @@ public class AdminController {
 	}
 	
 	@RequestMapping("re_select")
-	public String re_board_select(String boardtype) {
-		session.removeAttribute("list");
+	public String re_board_select(String boardtype,Model m) {
 		session.removeAttribute("boardtype");
 		if(boardtype.contentEquals("mb")) {
 			List<MemboardDto> list = admin_service.re_memboard();
-			session.setAttribute("list", list);
-		}else if(boardtype.contentEquals("")) {
-			
+			m.addAttribute("list", list);
+		}else if(boardtype.contentEquals("ps")) {
+			List<WaitlistDTO> list = admin_service.re_psboard();
+			m.addAttribute("list", list);
 		}
 		session.setAttribute("boardtype", boardtype);
 		
@@ -145,15 +146,14 @@ public class AdminController {
 	}
 
 	@RequestMapping("boardselect")
-	public String boardselect(String boardtype, Integer cpage) {
-		session.removeAttribute("list");
+	public String boardselect(String boardtype, Integer cpage , Model m) {
 		session.removeAttribute("boardtype");
 		if(boardtype.contentEquals("mem_board")) {
 			if(cpage == null) {
 				cpage = 1;
 			}
 			List<MemboardDto> mblist = pet_service.mb_boardList(cpage);
-			session.setAttribute("list", mblist);
+			m.addAttribute("list", mblist);
 		}
 		session.setAttribute("boardtype", boardtype);
 		return "admin/board_management";

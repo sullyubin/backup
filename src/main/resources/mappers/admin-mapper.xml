@@ -16,6 +16,8 @@
 	<update id="petaccept">
 		update member set mem_type = 2 where mem_id = #{value}
 	</update>
+	
+	
 	<!-- memeber management  -->
 	<select id="memberlist" resultType="kh.pet.dto.MemberDTO">
 	 select * from (select member.* , row_number() over(order by MEM_JOIN_DATE desc)rnum from member) where rnum between ${start} and ${end}
@@ -28,6 +30,10 @@
 	<!--reservation management -->
 	<select id="rememboard" resultType="kh.pet.dto.MemboardDto">
 		select * from mem_board where MB_RESTATUS = 'yes'
+	</select>
+	
+	<select id="repsboard" resultType="kh.pet.dto.WaitlistDTO">
+		select * from waitlist
 	</select>
 	
 </mapper>
