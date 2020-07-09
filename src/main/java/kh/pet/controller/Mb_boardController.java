@@ -91,7 +91,7 @@ public class Mb_boardController {
 		return "mb_board/board";
 	}
 
-	// �닔�젙 酉�	
+	// 占쎈땾占쎌젟 �뀎占�	
 	@RequestMapping("modfilist")
 	public String modfilist(Model m,MemboardDto mbdto) {
 		MemberDTO mdto = (MemberDTO)this.session.getAttribute("loginInfo");

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,21 +18,17 @@ public class NaviDAO {
 	@Autowired
 	private SqlSessionTemplate mybaits;
 
-
-	// 게시판에 올라갈 전체 개수
+	@Autowired
+	HttpSession session;
+	// 寃뚯떆�뙋�뿉 �삱�씪媛� �쟾泥� 媛쒖닔
 	public int getArticleCount(String name) throws Exception {
-		String id="";
-		if(name.contentEquals("Navi.bar")) {
-			id="aa";
-		}else if(name.contentEquals("Navi.pointcount")) {
-			id="aa";
-		}
+		String id = (String)session.getAttribute("id");
 		int result = mybaits.selectOne(name, id);
 		System.out.println(result);
 		return result;
 	}
 
-	//시작페이지 종료페이지 정하는 로직
+	//�떆�옉�럹�씠吏� 醫낅즺�럹�씠吏� �젙�븯�뒗 濡쒖쭅
 	public List<Object> selectByPageNo(int cpage, String id, String name) throws Exception {
 		if(name.contentEquals("list")) {
 			Main_Configuration.recordCountPerPage=6;
@@ -51,13 +48,12 @@ public class NaviDAO {
 		return list;
 		}else if(name.contentEquals("listpoint")) {
 		List<Object> list = mybaits.selectList("Navi.pointbar", se);
-		System.out.println("listpoint 리턴");
 		return list;
 		}
 		return null ;
 	}
 
-// 네비바 만드는 메소드
+// �꽕鍮꾨컮 留뚮뱶�뒗 硫붿냼�뱶
 	public String getPageNavi(int currentPage, String name) throws Exception {
 		int recordTotalCount=0;
 		if(name.contentEquals("list")) {
@@ -71,8 +67,8 @@ public class NaviDAO {
 		} else {
 			pageTotalCount = (recordTotalCount / Main_Configuration.recordCountPerPage);
 		}
-		System.out.println("네비바 개수 : " + pageTotalCount);
-		// 공격자를 대비한 보안 코드
+		System.out.println("�꽕鍮꾨컮 媛쒖닔 : " + pageTotalCount);
+		// 怨듦꺽�옄瑜� ��鍮꾪븳 蹂댁븞 肄붾뱶
 		if (currentPage < 1) {
 			currentPage = 1;
 		} else if (currentPage > pageTotalCount) {
