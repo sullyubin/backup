@@ -27,8 +27,7 @@ public class Mb_boardController {
 	private Petservice service; 
 	@Autowired
 	private HttpSession session;	
-
-	//	諛섎젮�씤 �벑濡앷쾶�떆�뙋 �젙蹂� 異쒕젰	
+	
 	@RequestMapping("home")
 	public String home(Model m) {
 		List<PetDto> list = service.Petselect();
@@ -41,24 +40,22 @@ public class Mb_boardController {
 		return "mb_board/board_register";
 	}
 
-	//	�삁�빟�벑濡� - 1
+	
 	@RequestMapping("index")
 	public String index(MemboardDto mbdto) {
 		MemberDTO mdto = (MemberDTO)this.session.getAttribute("loginInfo");
-		System.out.println(mbdto.getMb_service());
 		mbdto.setMb_writer(mdto.getMem_id());
 		service.Memboardinsert(mbdto);
 
 		return "redirect:redlist";
 	}
 
-	// �벑濡앸럭 蹂대뱶seq媛믪텛媛��빐以섏빞�븿	
+
 	@RequestMapping("redlist")
 	public String redlist(Model m,MemboardDto mbdto) {
 		MemberDTO mdto = (MemberDTO)this.session.getAttribute("loginInfo");
 		String add = service.addselec(mdto.getMem_id());
 		List<MemboardDto> dtolist  = service.seqid(mdto.getMem_id());
-		System.out.println(dtolist.get(0).getMb_seq());
 		MemboardDto mlist = service.redlist(dtolist.get(0).getMb_seq());
 		String[] servicearr = mlist.getMb_service().split(",");
 		String[] petnamearr = mlist.getMb_pet_name().split(",");
@@ -83,6 +80,7 @@ public class Mb_boardController {
 		int timesub = stime - etime;
 		String[]  alltimearr = Integer.toString(timesub).split("-");
 		int alltime = Integer.parseInt(alltimearr[1]);
+		System.out.println(alltime);
 		m.addAttribute("mlist", mlist);
 		m.addAttribute("add", add);
 		m.addAttribute("services", services);
@@ -160,37 +158,25 @@ public class Mb_boardController {
 
 	@RequestMapping("modified_con")
 	public String modified_con(MemboardDto mbdto,Model m) {
-		System.out.println(mbdto.getMb_pet_name());
-		System.out.println(mbdto.getMb_startday());
-		System.out.println(mbdto.getMb_endday());
-		System.out.println(mbdto.getMb_unique());
-		System.out.println(mbdto.getMb_service());
-
 		service.Memboardupdate(mbdto);	
 		m.addAttribute("mb_seq", mbdto.getMb_seq());
-		return "redirect:redlist";
+		return "redirect:modfilist";
 	}
 
 	@RequestMapping("mb_board")
 	public String mb_board(Model m,HttpServletRequest req) throws Exception{
-
 		int cpage = 1;
-
 		try {
 			cpage= Integer.parseInt(req.getParameter("cpage"));
 		} catch(Exception e) {}
 
 		List<MemboardDto> mblist = service.mb_boardList(cpage);
-
-		System.out.println(mblist.size());
 		for(MemboardDto mb : mblist) {
 			if(mb.getMb_petphoto() != null) {
 				String[] photoarr = mb.getMb_petphoto().split(",",-1);
 				mb.setPhoto(photoarr);
 			}
 		}
-
-		System.out.println("�쁽�옱�럹�씠吏� : "+cpage);
 		String navi = service.getPageNavi(cpage);
 		m.addAttribute("navi", navi);
 		m.addAttribute("mblist", mblist);
@@ -211,7 +197,6 @@ public class Mb_boardController {
        String re = "false";
 		if(!mdto.getMem_id().contentEquals(mbdto.getMb_writer())) {
 			mbdto.setMb_booker(mdto.getMem_id());
-			System.out.println(mbdto.getMb_writer());
 			service.applyup(mbdto);
 			re = "true";
 		}

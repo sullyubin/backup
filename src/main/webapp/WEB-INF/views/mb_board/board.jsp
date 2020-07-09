@@ -31,7 +31,7 @@
 <link rel="stylesheet" href="/resources/main/css/rangeslider.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/resources/mb/dist/tavo-calendar.css">
-<link rel="stylesheet" href="/resources/main/css/style.css">
+<link rel="stylesheet" href="/resources/mb/css/style.css">
 <link rel="stylesheet" href="/resources/mb/css/checkbox.css">
 <link rel="stylesheet" href="/resources/mb/css/calendar.css">
 
@@ -234,15 +234,13 @@
 									</c:if>
 								</div>
 							</div>
+								<div class="conb">
 							<c:if test="${mlist.mb_writer eq id}">
-								<div>
-									<a href="/mb/modified?mb_seq=${mlist.mb_seq}" class="btn btn-primary text-white" id="modified">수정</a>
-									<a href="/mb/deleteboard?mb_seq=${mlist.mb_seq}" class="btn btn-primary text-white" id="delete">삭제</a>
-								</div>
+									<a href="/mb/modified?mb_seq=${mlist.mb_seq}" class="text-white" id="modified">수정</a>
+									<a href="/mb/deleteboard?mb_seq=${mlist.mb_seq}" class="text-white" id="delete">삭제</a>
 							</c:if>		
-							<div>
-								<a href="/mb/mb_board" class="btn btn-primary text-white" id="modified">목록</a>
-							</div>	
+									<a href="/mb/mb_board" class="text-white" id="modified">목록</a>
+								</div>
 							<div class="col-12 mt-5 text-center"></div>
 
 						</div>
@@ -462,7 +460,7 @@
 			           
 			var point = 0;
 			<c:forEach var = "j" items="${services}">
-				$("#"+"${j}").css("color","red");
+				$("#"+"${j}").css("color","#17a2b8");
 			</c:forEach>	
 			<c:forEach var="i" items="${pettype}">
 				if ("${i}" == "소") {
