@@ -70,7 +70,7 @@
 }
 
 .services input[type="checkbox"]:checked+label {
-	color: #ff4301;
+	color: #17a2b8;
 }
 
 .services {
@@ -168,15 +168,15 @@
 
 		<div class="site-section bg-light">
 			<div class="container">
-				<form action="/mb/index" method="post">
+				<form action="/mb/index" method="post" id="send">
 					<div class="row">
 						<div class="col-lg-7">
 							<div class="d-block d-md-flex listing-horizontal">
 								<div class="lh-content">
 									<div class="title">
 										<h3>제목</h3>
-										<div contenteditable="true" id="title"></div>
-										<input type="hidden" name="mb_title" id="mb_title" required>
+										<div contenteditable="true" id="title" ></div>
+										<input type="hidden" name="mb_title" id="mb_title">
 									</div>
 								</div>
 							</div>
@@ -206,16 +206,16 @@
 										<div class="service_list" style="text-align: center">
 											<div>
 												<span class="services"> <input type="checkbox"
-													name="mb_service" id="service1" value=service1 /> <label
+													name="mb_service" id="service1" value=service1 class="chservi"/> <label
 													for="service1"> <i class="icofont-tasks-alt"></i>장기
 														예약
 												</label>
 												</span> <span class="services"> <input type="checkbox"
-													name="mb_service" id="service2" value=service2 /> <label
+													name="mb_service" id="service2" value=service2 class="chservi"/> <label
 													for="service2"> <i class="icofont-pills"></i> 약물 복용
 												</label>
 												</span> <span class="services"> <input type="checkbox"
-													style="" name="mb_service" id="service3" value=service3 />
+													style="" name="mb_service" id="service3" value=service3 class="chservi"/>
 													<label for="service3"><i class='bx bx-bone'></i>실내
 														놀이</label>
 												</span>
@@ -223,27 +223,27 @@
 
 											<div>
 												<span class="services"> <input type="checkbox"
-													name="mb_service" id="service4" value=service4 /> <label
+													name="mb_service" id="service4" value=service4 class="chservi"/> <label
 													for="service4"><i class="icofont-bathtub"></i>목욕 가능</label>
 												</span> <span class="services"> <input type="checkbox"
-													name="mb_service" id="service5" value=service5 /> <label
+													name="mb_service" id="service5" value=service5 class="chservi" /> <label
 													for="service5"><i class="icofont-first-aid"></i>응급
 														처치</label>
 												</span> <span class="services"> <input type="checkbox"
-													name="mb_service" id="service6" value=service6 /> <label
+													name="mb_service" id="service6" value=service6 class="chservi"/> <label
 													for="service6"><i class='bx bx-walk'></i>야외 산책</label>
 												</span>
 											</div>
 											<div>
 												<span class="services"> <input type="checkbox"
-													name="mb_service" id="service7" value=service7 /> <label
+													name="mb_service" id="service7" value=service7 class="chservi"/> <label
 													for="service7"><i class="icofont-tasks-alt"></i>발톱
 														관리</label>
 												</span> <span class="services"> <input type="checkbox"
-													name="mb_service" id="service8" value=service8 /> <label
+													name="mb_service" id="service8" value=service8 class="chservi"/> <label
 													for="service8"><i class="icofont-ui-cut"></i>모발 관리</label>
 												</span> <span class="services"> <input type="checkbox"
-													name="mb_service" id="service9" value=service9 /> <label
+													name="mb_service" id="service9" value=service9 class="chservi"/> <label
 													for="service9"><i class="icofont-car-alt-3"></i>집앞
 														픽업</label>
 												</span>
@@ -258,10 +258,13 @@
 									<div class="d-block my-3">
 										<h3>특이사항</h3>
 										<div contenteditable="true" id="uniqueness"></div>
-										<input type="hidden" name="mb_unique" id="mb_unique" required>
+										<input type="hidden" name="mb_unique" id="mb_unique">
 									</div>
 								</div>
 							</div>
+							<div class="conb">
+								<a href="/mb/mb_board" class="text-white" id="modified">목록</a>
+							</div>	
 						</div>
 
 						<div class="col-lg-4 ml-5">
@@ -480,19 +483,6 @@
 			</div>
 		</div>
 
-		<script>
-			$("#uniqueness").on("keyup", function() {
-				var uniquetext = $("#uniqueness").html();
-				$("#mb_unique").val(uniquetext);
-			})
-
-			$("#title").on("keyup", function() {
-				var title = $("#title").html();
-				$("#mb_title").val(title);
-			})
-		</script>
-
-
 		<div class="py-5 bg-primary">
 			<div class="container">
 				<div class="row">
@@ -702,9 +692,9 @@
            
             $(".etimelist  li").on("click",function(){
                 var edata = $(this).data("time");      	
-           		if(dataTime > edata){
+           		if(dataTime >= edata){
            			alert("다시선택하세요");
-           			return false
+           			$(".etime").html("끝시간");
            		}else{
            			$("#stime").val($(".stime").html());
            			$("#etime").val($(".etime").html());
@@ -718,6 +708,57 @@
             })
   
         })
+    </script>
+    <script>
+			$("#uniqueness").on("keyup", function() {
+				var uniquetext = $("#uniqueness").html();
+				$("#mb_unique").val(uniquetext);
+			})
+
+			$("#title").on("keyup", function() {
+				var title = $("#title").html();
+				$("#mb_title").val(title);
+			})
+			
+	</script>
+    <script>
+    		$("#send").on("submit",function(){
+    			var titleVal = $("#mb_title").val();
+    			var timeVal = $(".bu").data("time");
+    			var petVal = $(".petname:checked").val();
+    			var serviceVal = $(".chservi:checked").val();
+    			var startdayVal = $("#mb_startday").val();
+    			var uniqueVal = $("#mb_unique").val();
+    			if(titleVal == ""){
+    				alert("제목을 입력 해주세요");
+    				return false;
+    			}
+    			
+    			if(timeVal == null){
+    				alert("시간을 선택 해주세요");
+    				return false;
+    			}
+    			
+    			if(petVal == null){
+    				alert("강아지를 선택 해주세요");
+    				return false;
+    			}
+    			
+    			if(serviceVal == null){
+    				alert("서비스를 선택 해주세요");
+    				return false;
+    			}
+    			
+    			if(startdayVal == ""){
+    				alert("날짜를 선택 해주세요");
+    				return false;
+    			}		
+
+    			if(uniqueVal == ""){
+    				alert("특이 사항을 입력 해주세요");
+    				return false;
+    			}		
+    		})
     </script>
 </body>
 

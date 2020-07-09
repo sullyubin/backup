@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="/resources/main/css/aos.css">
     <link rel="stylesheet" href="/resources/main/css/rangeslider.css">
 
-    <link rel="stylesheet" href="/resources/main/css/style.css">
+    <link rel="stylesheet" href="/resources/mb/css/style.css">
 
 </head>
 
