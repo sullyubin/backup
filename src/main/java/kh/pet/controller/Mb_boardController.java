@@ -61,17 +61,10 @@ public class Mb_boardController {
 		System.out.println(dtolist.get(0).getMb_seq());
 		MemboardDto mlist = service.redlist(dtolist.get(0).getMb_seq());
 		String[] servicearr = mlist.getMb_service().split(",");
-		String[] timearr = mlist.getMb_time().split(",");
 		String[] petnamearr = mlist.getMb_pet_name().split(",");
-		List<String> times = new ArrayList<String>();
-		List<String> pettype = new ArrayList<String>();
-		List<String> petphoto = new ArrayList<String>();
-		List<String> services = new ArrayList<String>();
-		List<String> timetype = new ArrayList<String>();
-		for(String time : timearr) {
-			times.add(service.gettime(time));
-			timetype.add(time);
-		}
+		List<String> pettype = new ArrayList<>();
+		List<String> petphoto = new ArrayList<>();
+		List<String> services = new ArrayList<>();
 		for(String petname : petnamearr) {
 			System.out.println(petname);
 			pettype.add(service.getpettype(petname));
@@ -83,17 +76,20 @@ public class Mb_boardController {
 		for(String service : servicearr) {
 			services.add(service);
 		}
-
-		System.out.println(pettype);
-		System.out.println("seq : "+mlist.getMb_seq());
-		m.addAttribute("times", times);
+		String[] stimearr = mlist.getMb_stime().split(":");
+		String[] etimearr = mlist.getMb_etime().split(":");
+		int stime = Integer.parseInt(stimearr[0]);
+		int etime = Integer.parseInt(etimearr[0]);
+		int timesub = stime - etime;
+		String[]  alltimearr = Integer.toString(timesub).split("-");
+		int alltime = Integer.parseInt(alltimearr[1]);
 		m.addAttribute("mlist", mlist);
 		m.addAttribute("add", add);
 		m.addAttribute("services", services);
 		m.addAttribute("pettype", pettype);
 		m.addAttribute("id", mdto.getMem_id());
 		m.addAttribute("petphoto", petphoto);
-		m.addAttribute("timetype", timetype);
+		
 		return "mb_board/board";
 	}
 
@@ -104,17 +100,10 @@ public class Mb_boardController {
 		String add = service.addselec(mdto.getMem_id());
 		MemboardDto mlist = service.redlist(mbdto.getMb_seq());
 		String[] servicearr = mlist.getMb_service().split(",");
-		String[] timearr = mlist.getMb_time().split(",");
 		String[] petnamearr = mlist.getMb_pet_name().split(",");
-		List<String> times = new ArrayList<String>();
-		List<String> pettype = new ArrayList<String>();
-		List<String> petphoto = new ArrayList<String>();
-		List<String> services = new ArrayList<String>();
-		List<String> timetype = new ArrayList<String>();
-		for(String time : timearr) {
-			times.add(service.gettime(time));
-			timetype.add(time);
-		}
+		List<String> pettype = new ArrayList<>();
+		List<String> petphoto = new ArrayList<>();
+		List<String> services = new ArrayList<>();
 		for(String petname : petnamearr) {
 			System.out.println(petname);
 			pettype.add(service.getpettype(petname));
@@ -126,17 +115,20 @@ public class Mb_boardController {
 		for(String service : servicearr) {
 			services.add(service);
 		}
-
-		System.out.println(pettype);
-		System.out.println("seq : "+mlist.getMb_seq());
-		m.addAttribute("times", times);
+		String[] stimearr = mlist.getMb_stime().split(":");
+		String[] etimearr = mlist.getMb_etime().split(":");
+		int stime = Integer.parseInt(stimearr[0]);
+		int etime = Integer.parseInt(etimearr[0]);
+		int timesub = stime - etime;
+		String[]  alltimearr = Integer.toString(timesub).split("-");
+		int alltime = Integer.parseInt(alltimearr[1]);
 		m.addAttribute("mlist", mlist);
 		m.addAttribute("add", add);
 		m.addAttribute("services", services);
 		m.addAttribute("pettype", pettype);
 		m.addAttribute("id", mdto.getMem_id());
 		m.addAttribute("petphoto", petphoto);
-		m.addAttribute("timetype", timetype);
+		m.addAttribute("alltime",alltime);
 		return "mb_board/board";
 	}
 
@@ -145,15 +137,8 @@ public class Mb_boardController {
 		MemboardDto modlist = service.modlist(mb_seq);
 		String[] petnamearr = modlist.getMb_pet_name().split(",");
 		String[] servicearr = modlist.getMb_service().split(",");
-		String[] timearr = modlist.getMb_time().split(",");
-		List<String> times = new ArrayList<String>();
-		List<String> petnames = new ArrayList<String>();
-		List<String> services = new ArrayList<String>();
-
-		for(String time : timearr) {
-			times.add(time);
-		}
-
+		List<String> petnames = new ArrayList<>();
+		List<String> services = new ArrayList<>();
 		for(String service : servicearr) {
 			services.add(service);
 		}
@@ -161,15 +146,12 @@ public class Mb_boardController {
 		for(String petname : petnamearr) {
 			petnames.add(petname);
 		}
-
-
 		List<PetDto> list = service.Petselect();
 
 		String add = service.addselec(modlist.getMb_writer());
 		m.addAttribute("list", list);
 		m.addAttribute("add", add);	
 		m.addAttribute("modlist", modlist);	
-		m.addAttribute("times", times);	
 		m.addAttribute("petnames", petnames);	
 		m.addAttribute("services", services);
 
@@ -182,7 +164,6 @@ public class Mb_boardController {
 		System.out.println(mbdto.getMb_startday());
 		System.out.println(mbdto.getMb_endday());
 		System.out.println(mbdto.getMb_unique());
-		System.out.println(mbdto.getMb_time());
 		System.out.println(mbdto.getMb_service());
 
 		service.Memboardupdate(mbdto);	

@@ -11,7 +11,8 @@ public class MemboardDto {
 	private String mb_service;
 	private String mb_startday;
 	private String mb_endday;
-	private String mb_time;
+	private String mb_stime;
+	private String mb_etime;
 	private String mb_unique;
 	private String mb_point;
 	private String mb_petphoto;
@@ -26,8 +27,9 @@ public class MemboardDto {
 	}
 
 	public MemboardDto(String mb_seq, String mb_title, String mb_writer, Timestamp mb_date, String mb_pet_name,
-			String mb_service, String mb_startday, String mb_endday, String mb_time, String mb_unique, String mb_point,
-			String mb_petphoto, String mb_boardstatus, String mb_restatus, String mb_booker, String[] photo) {
+			String mb_service, String mb_startday, String mb_endday, String mb_stime, String mb_etime, String mb_unique,
+			String mb_point, String mb_petphoto, String mb_boardstatus, String mb_restatus, String mb_booker,
+			String[] photo) {
 		super();
 		this.mb_seq = mb_seq;
 		this.mb_title = mb_title;
@@ -37,7 +39,8 @@ public class MemboardDto {
 		this.mb_service = mb_service;
 		this.mb_startday = mb_startday;
 		this.mb_endday = mb_endday;
-		this.mb_time = mb_time;
+		this.mb_stime = mb_stime;
+		this.mb_etime = mb_etime;
 		this.mb_unique = mb_unique;
 		this.mb_point = mb_point;
 		this.mb_petphoto = mb_petphoto;
@@ -111,12 +114,20 @@ public class MemboardDto {
 		this.mb_endday = mb_endday;
 	}
 
-	public String getMb_time() {
-		return mb_time;
+	public String getMb_stime() {
+		return mb_stime;
 	}
 
-	public void setMb_time(String mb_time) {
-		this.mb_time = mb_time;
+	public void setMb_stime(String mb_stime) {
+		this.mb_stime = mb_stime;
+	}
+
+	public String getMb_etime() {
+		return mb_etime;
+	}
+
+	public void setMb_etime(String mb_etime) {
+		this.mb_etime = mb_etime;
 	}
 
 	public String getMb_unique() {
@@ -174,6 +185,7 @@ public class MemboardDto {
 	public void setPhoto(String[] photo) {
 		this.photo = photo;
 	}
-
+	
+	
 	
 }

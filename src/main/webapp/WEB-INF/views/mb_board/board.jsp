@@ -268,12 +268,10 @@
 									<div data-brackets-id='16'
 										style="display: flex; flex-direction: row; justify-content: space-between;">
 										<div id="timelist">
-											<c:if test="${!empty mlist}">
-												<c:forEach items="${times}" var="i">
+											<c:if test="${!empty mlist}">									
 													<div>
-														<span>&nbsp;&nbsp;${i}</span>
-													</div>
-												</c:forEach>
+														<span>시작시간&nbsp;&nbsp;${mlist.mb_stime}</span>&nbsp;&nbsp;<span>끝시간&nbsp;&nbsp;${mlist.mb_etime}</span>
+													</div>							
 											</c:if>
 										</div>
 									</div>
@@ -467,28 +465,16 @@
 				$("#"+"${j}").css("color","red");
 			</c:forEach>	
 			<c:forEach var="i" items="${pettype}">
-				<c:forEach var = "l" items="${timetype}">
-				console.log("${l}");
-				console.log("${i}");
-				if ("${i}" == "소" && ("${l}" != "am") && ("${l}" != "pm") && ("${l}" != "full")) {
+				if ("${i}" == "소") {
 					point += 50;
-				} else if ("${i}" == "중" && ("${l}" != "am") && ("${l}" != "pm") && ("${l}" != "full")) {
+				} else if ("${i}" == "중") {
 					point += 60;
-				} else if ("${i}" == "대" && ("${l}" != "am") && ("${l}" != "pm") && ("${l}" != "full")) {
+				} else if ("${i}" == "대") {
 					point += 65;
-				} else if ("${i}" == "소" && (("${l}" == "am") || ("${l}" == "pm")) && ("${l}" != "full")) {
-					point += 150;
-				} else if ("${i}" == "중" && (("${l}" == "am") || ("${l}" == "pm")) && ("${l}" != "full")) {
-					point += 200;
-				} else if ("${i}" == "대" && (("${l}" == "am") || ("${l}" == "pm")) && ("${l}" != "full")) {
-					point += 250;
-				} else if ("${l}" == "full") {
-					point += 400;
 				}
-				</c:forEach>
 			</c:forEach>
-			
-			$(".price span").html(point*(duration+1));
+			var  time = "${alltime}";
+			$(".price span").html((point*(duration+1))*time);
 			
 			$(".apply").on("click",function(){
 				$.ajax({

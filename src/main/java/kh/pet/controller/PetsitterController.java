@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import kh.pet.dto.MemberDTO;
 import kh.pet.dto.PetsitterDTO;
 import kh.pet.service.PetsitterService;
 
@@ -60,8 +61,8 @@ public class PetsitterController {
 	
 	@RequestMapping("/outputSingle")
 	public String outputSingle(Model model,PetsitterDTO psdto) throws Exception{
-		//String ps_id = ((MemberDTO)session.getAttribute("login_Info")).getMem_id();
-		String ps_id = "test02";
+		String ps_id = ((MemberDTO)session.getAttribute("loginInfo")).getMem_id();
+		
 		psdto = psservice.selectById(ps_id);
 
 		model.addAttribute("petsitterInfo",psdto);
