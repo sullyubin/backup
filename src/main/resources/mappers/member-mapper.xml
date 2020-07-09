@@ -12,13 +12,12 @@
 	<select resultType="int" id="emailCheck">select count(*) from member where
 		mem_email = #{value} </select>
 
-	<insert id="signup">insert into member
-		values(#{mem_id},#{mem_pw},#{mem_name},#{mem_email},#{mem_phone},#{mem_zipcode},#{mem_address1},#{mem_address2},1,1,
-		sysdate, 0, 0, 'n',#{mem_authkey},'yes') </insert>
+	<insert id="signup">
+		insert into member values(#{mem_id},#{mem_pw},#{mem_name},#{mem_email},#{mem_phone},#{mem_zipcode},#{mem_address1},#{mem_address2},1,1, sysdate, 0, 0, 'n',#{mem_authkey},'no') 
+	</insert>
+	
 	<select resultType="int" id="authkey">
-
 		<!-- 이메일 인증체크 -->
-
 		select count(*) from member where mem_authkey = #{value}
 	</select>
 
@@ -68,7 +67,8 @@
 
 		<!-- 비번 찾기 전 해당 멤버 있는지 확인 -->
 
-		select count(*) from member where mem_id = #{id} and mem_email = #{email}
+		select count(*) from member where mem_id = #{id} and mem_email =
+		#{email}
 	</select>
 
 
