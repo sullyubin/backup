@@ -5,19 +5,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<link rel="stylesheet"
-	href="/resources/main/fonts/flaticon/font/flaticon.css">
-<link rel="stylesheet" href="/resources/petsiter/css/tavo-calendar.css">
-<link href="/resources/mb/icofont/icofont.min.css" rel="stylesheet">
-<link href='https://unpkg.com/boxicons@2.0.5/css/boxicons.min.css'rel='stylesheet'>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <script src="https://unpkg.com/boxicons@latest/dist/boxicons.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+
+<link rel="stylesheet" href="/resources/main/fonts/flaticon/font/flaticon.css">
+<link rel="stylesheet" href="/resources/mb/icofont/icofont.min.css">
+<link rel="stylesheet" href='https://unpkg.com/boxicons@2.0.5/css/boxicons.min.css'>
+<!-- <link rel="stylesheet" href="/resources/petsiter/css/datepickk.min.css"> -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/zenburn.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,600">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<script src="dist/helloweek.min.js" type="text/javascript"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script src="/resources/petsiter/js/tavo-calendar.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" rel="stylesheet">
+<link href="dist/helloweek.css" rel="stylesheet">
+
+
 </head>
 <style>
+#datePicker .d-table { display:flex !important; }
 #div_psb_contents {
 	border: 1px solid grey;
 	width: 100%;
@@ -94,7 +104,7 @@ ul{
     padding-inline-start: 5px;
 }
 ul>li,input{
-	style:none;
+	style:none !important;
 	display:inline-block;
 	padding-right:20px;
 }
@@ -333,14 +343,14 @@ ul>li,input{
 
 
 
-					<div class="col-lg-4 ml-4">
+					<div class="col-lg-4 mb-5">
 					<div class='mb-5' style="width: 375px; border-radius: 8px; border: 1px solid #DFE3EA; 
-						box-shadow: 1px 3px 7px rgba(0, 0, 0, 0.07); padding: 38px 10px; margin-top: 10px;">
+						box-shadow: 1px 3px 7px rgba(0, 0, 0, 0.07); padding: 38px 10px 0px;">
 						<h3 class="h5 text-black mb-3 " style="text-align: center">
 								휴무일 선택<i class="icofont-calendar"></i>
 							</h3>
 							<div class="reserve_calendar">
-								<div id="my-calendar"></div>
+								<div id="datePicker" style="height:600px;width:100%;max-width: 600px;"></div>
 								<div class="select_date">
 								<ul class="head_date" style="text-align:center">
 									<li style="width:150px;"><b>시작일</b></li>
@@ -350,40 +360,43 @@ ul>li,input{
 									<li><input type="text" id="start_day" name="psb_start_day" placeholder="시작일" style="width:150px; text-align:center;"></li>
 									<li><input type="text" id="end_day" name="psb_end_day" placeholder="종료일" style="width:150px; text-align:center;"></li>
 								</ul>
-								
 								</div>
+						            <script>
+						               var now = new Date();
+						               var arr = [];
+						               var datePicker = new Datepickk1({
+						                  container: 
+						                        document.querySelector('#datePicker'),
+						                  inline:true,
+						                  range: true,
+						                  tooltips: {
+						                     date: new Date(),
+						                     text: '예약'
+						                  },
+						                  		
+						                        onSelect(checked){
+						                	  		var i =0;
+						                	  		var selday = this.toLocaleDateString();
+						                	  	for(var i=0; i<3; i++){
+							                     	arr.push(selday);
+							                        console.log(arr);
+						                	  	}
+						                	  	arr = [];
+						                       }
+						               });
+						            </script>
+						         </div>
 							</div>
-
 							<hr class="mb-4">
 
-							<h3 class="h5 text-black mb-3 " style="text-align: center">
-								돌봄 가능한시간 선택<i class="icofont-clock-time"></i>
-							</h3>
-							<div id="timelist" style="text-align: center">
-								<div>
-									<input type="checkbox" name="psb_time" value="first" id="first" class="basic">
-										<label for="first">&nbsp;&nbsp;1부 09:00 ~ 11:00</label>
-								</div>
-								<div>
-									<input type="checkbox" name="psb_time" value="second" id="second" class="basic">
-										<label for="second">&nbsp;&nbsp;2부 11:00 ~ 13:00</label>
-								</div>
-								<div>
-									<input type="checkbox" name="psb_time" value="third" id="third" class="basic">
-										<label for="third">&nbsp;&nbsp;3부 13:00 ~ 15:00</label>
-								</div>
-								<div>
-									<input type="checkbox" name="psb_time" value="fourth"id="fourth" class="basic">
-									<label for="fourth">&nbsp;&nbsp;4부 15:00 ~ 17:00</label>
-								</div>
-								<div>
-									<input type="checkbox" name="psb_time" value="fifth" id="fifth" class="basic">
-										<label for="fifth">&nbsp;&nbsp;5부 17:00 ~ 19:00</label>
-								</div>
-								<div>
-									<input type="checkbox" name="psb_time" value="sixth" id="sixth" class="basic">
-										<label for="sixth">&nbsp;&nbsp;6부 19:00 ~ 21:00</label>
-								</div>
+
+							<div class='mb-5' style="width: 375px; border-radius: 8px; border: 1px solid #DFE3EA; 
+								box-shadow: 1px 3px 7px rgba(0, 0, 0, 0.07); padding: 20px 10px;">
+								<h3 class="h5 text-black mb-3 " style="text-align: center">
+										돌봄 가능한시간 선택<i class="icofont-clock-time"></i>
+									</h3>
+								<div id="timelist" style="text-align: center">
+								
 								<div>
 									<input type="checkbox" name="psb_time" value="am" id="am">
 									<label for="am">&nbsp;&nbsp;오전 09:00 ~ 14:00</label>
@@ -397,7 +410,8 @@ ul>li,input{
 									<label for="full">&nbsp;&nbsp;풀타임 09:00 ~ 20:00</label>
 								</div>
 							</div>
-							
+							</div>
+
 							<hr class="mb-4">
 
 							<h3 class="h5 text-black mb-3 " style="text-align: center">
@@ -534,31 +548,7 @@ ul>li,input{
 		</div>
 	</div>
 
-
 	<jsp:include page="/WEB-INF/views/petsitter_board/footer.jsp" />
-	<script>
-	var today = new Date();
-	var my_calendar = new TavoCalendar('#my-calendar', {
-	            date: moment().format("YYYY-MM-DD"),
-	            date_start: "",
-	            date_end: "",
-	            format: "YYYY-MM-DD",
-	            range_select: true
-	        });
-	
-	 $("#my-calendar").on("calendar-range", function() {
-     	var range = my_calendar.getRange();
-         start_day = range.start;
-         end_day = range.end;
-         $("#start_day").val(start_day);
-         $("#end_day").val(end_day);
-        
-     });
-
-	       
-
-	</script>
-
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=673fb72de94724a273da597b59cd588d&libraries=services"></script>
 	<script>
