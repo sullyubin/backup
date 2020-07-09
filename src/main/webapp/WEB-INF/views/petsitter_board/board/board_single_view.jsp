@@ -5,6 +5,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet"
 	href="/resources/main/fonts/flaticon/font/flaticon.css">
 <link rel="stylesheet" href="/resources/petsiter/css/tavo-calendar.css">
@@ -12,13 +14,27 @@
 <link href='https://unpkg.com/boxicons@2.0.5/css/boxicons.min.css'
 	rel='stylesheet'>
 <script src="https://unpkg.com/boxicons@latest/dist/boxicons.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
+
+<link rel="stylesheet" href="/resources/main/fonts/flaticon/font/flaticon.css">
+<link rel="stylesheet" href="/resources/mb/icofont/icofont.min.css">
+<link rel="stylesheet" href='https://unpkg.com/boxicons@2.0.5/css/boxicons.min.css'>
+<!-- <link rel="stylesheet" href="/resources/petsiter/css/datepickk.min.css"> -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/styles/zenburn.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,600">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<script src="/resources/petsiter/js/datepickk.min.js"></script>
+<script src="/resources/petsiter/js/datepickk.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script src="/resources/petsiter/js/tavo-calendar.js"></script>
-<link href="/resources/mb/icofont/icofont.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/resources/petsiter/css/datepickk.min.css">
+<link rel="stylesheet" href="/resources/petsiter/css/datepickk.css">
+<link rel="stylesheet" href="/resources/petsiter/css/doc.css">
+
 </head>
 <style>
+#datePicker .d-table { display:flex !important; }
 #div_psb_contents {
 	border: 1px solid grey;
 	width: 100%;
@@ -266,8 +282,7 @@ ul>li, input {
 	                	$(".comment-list").html(str);
 					  });
                 	//$("#reviewCounts").html(data.length+" Comments");
-                	console.log(val.rw_writer);
-                	
+
 				},
 				error:function(){
 					alert("insertProc err");
@@ -487,7 +502,7 @@ ul>li, input {
 				
 				</div>
 				
-				<div class="col-lg-4 ml-4">
+				<div class="col-lg-4 ml-5">
 					<form action="/board/waitList">
 					<h3 class="h5 text-black mb-3 " style="text-align: center">
 						날짜 선택<i class="icofont-calendar"></i>
@@ -495,52 +510,45 @@ ul>li, input {
 					<input type="hidden" name="board_seq" value="${tot_Info.psb_seq}">
 					<input type="hidden" name="petsitter_id" value="${tot_Info.psb_writer}">
 					<div class="reserve_calendar">
-						<div id="my-calendar"></div>
+						<div id="datePicker" style="height:600px;width:100%;max-width: 600px;"></div>
 						<div class="select_date">
 							<ul class="head_date" style="text-align: center">
-								<li style="width: 150px;"><b>시작일</b></li>
-								<li style="width: 150px;"><b>종료일</b></li>
+								<li style="width: 200px;"><b>시작일</b></li>
+								<li style="width: 200px;"><b>종료일</b></li>
 							</ul>
 							<ul class="head_date" style="text-align: center">
-								<li><input type="text" id="rsv_start_day" name="rsv_start_day" value=""
-									style="width: 150px; text-align: center;" placeholder="시작일"></li>
-								<li><input type="text" id="rsv_end_day" name="rsv_end_day"
-									value="" style="width: 150px; text-align: center;" placeholder="종료일"></li>
+								<li><input type="date" id="rsv_start_day" name="rsv_start_day" value=""
+									style="width: 200px; text-align: center;" placeholder="시작일"></li>
+								<li><input type="date" id="rsv_end_day" name="rsv_end_day"
+									value="" style="width: 200x; text-align: center;" placeholder="종료일"></li>
 							</ul>
 						</div>
+						 <script>
+						 $(function(){
+							 var now = new Date();
+				               var datePicker = new Datepickk1({
+				                  	container:document.querySelector('#datePicker'),
+				                    minDate : "2020-07-02" , // ${tot_Info.psb_start_day}
+				                    maxDate : "2020-07-28", // ${tot_Info.psb_end_day}
+				                    inline:true,
+				                     range: true,
+				                     tooltips: {
+				                     date: new Date(),
+				                     text: '예약'
+				                  }, onSelect(checked){
+				                	 var selday = this.toLocaleDateString();
+					                  console.log(selday);
+				                }
+				              });
+						 })
+						</script>
 					</div>
-
 					<hr class="mb-4">
 
 					<h3 class="h5 text-black mb-3 " style="text-align: center">
 						시간 선택<i class="icofont-clock-time"></i>
 					</h3>
 					<div id="timelist" style="text-align: center">
-						<div class="li">
-							<input type="checkbox" name="psb_time" value="first" id="first" data-val="first" >
-							<label for="first">&nbsp;&nbsp;1부 09:00 ~ 11:00</label>
-						</div>
-						<div>
-							<input type="checkbox" name="psb_time" value="second"
-								id="second">
-								<label for="second">&nbsp;&nbsp;2부 11:00 ~ 13:00</label>
-						</div>
-						<div>
-							<input type="checkbox" name="psb_time" value="third" id="third">
-							<label for="third">&nbsp;&nbsp;3부 13:00 ~ 15:00</label>
-						</div>
-						<div>
-							<input type="checkbox" name="psb_time" value="fourth" id="fourth">
-							<label for="fourth">&nbsp;&nbsp;4부 15:00 ~ 17:00</label>
-						</div>
-						<div>
-							<input type="checkbox" name="psb_time" value="fifth" id="fifth">
-							<label for="fifth">&nbsp;&nbsp;5부 17:00 ~ 19:00</label>
-						</div>
-						<div>
-							<input type="checkbox" name="psb_time" value="sixth" id="sixth">
-							<label for="sixth">&nbsp;&nbsp;6부 19:00 ~ 21:00</label>
-						</div>
 						<div>
 							<input type="checkbox" name="psb_time" value="am" id="am">
 							<label for="am">&nbsp;&nbsp;오전 09:00 ~ 14:00</label>
@@ -703,27 +711,7 @@ ul>li, input {
 	
 	
 			<jsp:include page="/WEB-INF/views/petsitter_board/footer.jsp" />
-			<script>
-				var today = new Date();
-				var my_calendar = new TavoCalendar('#my-calendar', {
-			            date: moment().format("YYYY-MM-DD"),
-			            date_start: "",
-			            date_end: "",
-			            format: "YYYY-MM-DD",
-			            range_select:true
-			        });
-				
-	            $("#my-calendar").on("calendar-range", function() {
-	            	var range = my_calendar.getRange();
-	                start_day = range.start;
-	                end_day = range.end;
-	                console.log("시작일:"+start_day);
-	                console.log("종료일:"+end_day);
-	                $("#rsv_start_day").val(start_day);
-	                $("#rsv_end_day").val(end_day);
-	            });
-	</script>
-
+		
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=673fb72de94724a273da597b59cd588d&libraries=services"></script>
 	<script>
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
