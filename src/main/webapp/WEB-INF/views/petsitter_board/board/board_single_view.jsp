@@ -539,6 +539,8 @@ ul>li, input {
 				                     date: new Date(),
 				                     text: '예약'
 				                  }
+
+				                    
 				              }).onSelect = function(checked){
 				            	   var state = (checked)?'selected':'unselected';
 				            		   if(checked){
