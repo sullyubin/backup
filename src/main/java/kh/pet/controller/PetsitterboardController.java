@@ -52,7 +52,9 @@ public class PetsitterboardController {
 		try {
 			cpage= Integer.parseInt(req.getParameter("cpage"));
 		} catch(Exception e) {}
-		List<PetsitterboardDTO> list =psbservice.outputList(cpage); 
+
+		List<PetsitterboardDTO> list =psbservice.outputList(cpage);
+
 		String pageNavi = psbservice.getPageNavi(cpage);
 		model.addAttribute("list",list);
 		model.addAttribute("pageNavi",pageNavi);

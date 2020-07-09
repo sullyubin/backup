@@ -20,20 +20,20 @@
 
 <link rel="stylesheet" href="resources/main/fonts/icomoon/style.css">
 
-<link rel="stylesheet" href="resources/main/css/bootstrap.min.css">
-<link rel="stylesheet" href="resources/main/css/magnific-popup.css">
-<link rel="stylesheet" href="resources/main/css/jquery-ui.css">
-<link rel="stylesheet" href="resources/main/css/owl.carousel.min.css">
-<link rel="stylesheet" href="resources/main/css/owl.theme.default.min.css">
+<link rel="stylesheet" href="/resources/main/css/bootstrap.min.css">
+<link rel="stylesheet" href="/resources/main/css/magnific-popup.css">
+<link rel="stylesheet" href="/resources/main/css/jquery-ui.css">
+<link rel="stylesheet" href="/resources/main/css/owl.carousel.min.css">
+<link rel="stylesheet" href="/resources/main/css/owl.theme.default.min.css">
 
-<link rel="stylesheet" href="resources/main/css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="/resources/main/css/bootstrap-datepicker.css">
 
-<link rel="stylesheet" href="resources/main/fonts/flaticon/font/flaticon.css">
+<link rel="stylesheet" href="/resources/main/fonts/flaticon/font/flaticon.css">
 
-<link rel="stylesheet" href="resources/main/css/aos.css">
-<link rel="stylesheet" href="resources/main/css/rangeslider.css">
+<link rel="stylesheet" href="/resources/main/css/aos.css">
+<link rel="stylesheet" href="/resources/main/css/rangeslider.css">
 
-<link rel="stylesheet" href="resources/main/css/style.css">
+<link rel="stylesheet" href="/resources/main/css/style.css">
 
 
 

@@ -7,6 +7,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet"
+	href="/resources/main/fonts/flaticon/font/flaticon.css">
+<link rel="stylesheet" href="/resources/petsiter/css/tavo-calendar.css">
+<link href="/resources/mb/icofont/icofont.min.css" rel="stylesheet">
+<link href='https://unpkg.com/boxicons@2.0.5/css/boxicons.min.css'
+	rel='stylesheet'>
 <script src="https://unpkg.com/boxicons@latest/dist/boxicons.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.7/highlight.min.js"></script>
@@ -534,16 +540,6 @@ ul>li, input {
 					                  console.log(selday);
 				                }
 				              });
-				               
-				            	   var arr = [];
-					               var higharr =[];
-					               var rsv_start_day = $("#rsv_start_day").val();			              
-					               var rsv_end_day =  $("#rsv_end_day").val();
-				               
-				               $("#rsv_start_day").on("change",function(){
-				            	   
-				            	   if(rsv_start_day)
-				               })
 						 })
 						</script>
 					</div>

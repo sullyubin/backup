@@ -26,6 +26,11 @@ public class PetsitterController {
 	@Autowired
 	private HttpSession session;
 	
+	@RequestMapping("/petsitter")
+	public String tmp() {
+		return "petsitter_board/home";
+	}
+	
 	@RequestMapping("/petsitter_register_form")
 	public String petsitter_register_form() {
 		return "/petsitter_board/petsitter/petsitter_register_form";

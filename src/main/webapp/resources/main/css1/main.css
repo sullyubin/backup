@@ -189,14 +189,17 @@ tbody tr:hover {
 .column1 {
   width: 260px;
   padding-left: 40px;
+  text-align: center;
 }
 
 .column2 {
   width: 160px;
+  text-align: center;
 }
 
 .column3 {
   width: 245px;
+  text-align: center;
 }
 
 .column4 {
