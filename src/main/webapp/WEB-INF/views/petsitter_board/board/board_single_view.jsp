@@ -543,14 +543,12 @@ ul>li, input {
 						 })
 						</script>
 					</div>
-
 					<hr class="mb-4">
 
 					<h3 class="h5 text-black mb-3 " style="text-align: center">
 						시간 선택<i class="icofont-clock-time"></i>
 					</h3>
 					<div id="timelist" style="text-align: center">
-						
 						<div>
 							<input type="checkbox" name="psb_time" value="am" id="am">
 							<label for="am">&nbsp;&nbsp;오전 09:00 ~ 14:00</label>
